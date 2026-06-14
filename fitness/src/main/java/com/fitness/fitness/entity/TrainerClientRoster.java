@@ -5,32 +5,23 @@ import lombok.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "users")
+@Table(name = "trainer_client_roster")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class TrainerClientRoster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(name = "trainer_id", nullable = false)
+    private Long trainerId;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    private String password;
-
-    private String role; // client or trainer
-
-    private Integer age;
-
-    private Double weight;
-
-    private String gender;
+    @Column(name = "client_id", nullable = false)
+    private Long clientId;
 
     private Instant createdAt;
 }
