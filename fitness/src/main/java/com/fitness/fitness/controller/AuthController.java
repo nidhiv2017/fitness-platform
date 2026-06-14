@@ -35,11 +35,15 @@ public class AuthController {
         if (userService.findByEmail(req.getEmail()).isPresent()) {
             return ResponseEntity.status(400).body("Email already exists");
         }
+        String role = req.getRole();
+        if (role == null || role.trim().isEmpty()) {
+            role = "client"; // default role for self-registered users
+        }
         User u = User.builder()
                 .name(req.getName())
                 .email(req.getEmail())
                 .password(req.getPassword())
-                .role(req.getRole())
+                .role(role)
                 .age(req.getAge())
                 .weight(req.getWeight())
                 .gender(req.getGender())
